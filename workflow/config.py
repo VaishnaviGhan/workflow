@@ -1,0 +1,9 @@
+project_fields = (
+    ('SITES','SITES'),
+    ('USERS','USERS'),
+    ('STRUCTURE','STRUCTURE'),
+    ('CHECKLIST_TRANS_HEADER','CHECKLIST_TRANS_HEADER'),
+    ('PROJECT_ID','PROJECT_ID'),
+    ('PROJECT_NAME','PROJECT_NAME'),
+    
+)

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} 
+   {{ page_title }}
+{% endblock title %}
+
+{% block formcontent %}
+{% if form %}
+<div class="text-center">
+  <h2 style="color:darkcyan;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> {{ app_title }} </h2></div>
+  <form method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <button type="submit" class="btn-primary" style="padding-left:10px;padding-right: 10px;">Save</button>
+  </form>
+</div>
+{% else %}
+  
+{% endif %}
+<div class="container-fluid">
+<div class="row">
+    <div class="container-fluid">
+            {% if workflow_info %}
+            <br>
+            <h3>List of Inbox Documents</h3>
+            <div>
+                <table class="table table-hover table-responsive-md table-bordered" style="font-size: 10px;">
+                    <thead>
+                        <tr>
+                            <th class="custom-th" scope="col">Doc ID</th>
+                            <th class="custom-th" scope="col">Process Name</th>
+                            <th class="custom-th" scope="col">Previous User</th>
+                            <th class="custom-th" scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for docu in workflow_info %}
+                        <tr onclick="window.location='{{ docu.url }}';" style="cursor: pointer;">
+                            <td class="custom-td" scope="row">{{ docu.Doc_ID }}</td>
+                            <td class="custom-td">{{ docu.ProcessName }}</td>
+                            <td class="custom-td">{{ docu.CurrentUser }}</td>
+                            <td class="custom-td">{{ docu.DateTimeStamp }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+           
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

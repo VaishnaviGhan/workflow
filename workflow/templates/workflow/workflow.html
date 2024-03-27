@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {{ page_title }}
+{% endblock title %}
+
+{% block formcontent %}
+{% if form %}
+<div class="text-center">
+  <h2 style="color:darkcyan;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> {{ app_title }} </h2></div>
+<form method="post" id="workflow-form">
+    {% csrf_token %}
+  
+    <div class="row">
+      
+        <div class="col-md-12 text-left">
+          {{ form.ProcessName|as_crispy_field }}
+        </div>
+        
+       </div>
+          <div class="row">
+          <div class="col-md-6 text-left">
+            {{ form.para_1|as_crispy_field }}
+          
+          </div>
+          <div class="col-md-6 text-left">
+            {{ form.value_1|as_crispy_field }}
+          </div></div>
+          
+          <div class="row">
+            <div class="col-md-6 text-left">
+              {{ form.para_2|as_crispy_field }}
+             
+              
+            </div>
+            <div class="col-md-6 text-left">
+              {{ form.value_2|as_crispy_field }}
+
+            </div></div>
+            <div class="row">
+                <div class="col-md-6 text-left">
+                  {{ form.para_3|as_crispy_field }}
+                 
+                </div>
+                <div class="col-md-6 text-left">
+                  {{ form.value_3|as_crispy_field }}
+                </div></div>
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                      {{ form.para_4|as_crispy_field }}
+                     
+                    </div>
+                    <div class="col-md-6 text-left">
+                      {{ form.value_4|as_crispy_field }}
+                    </div></div>
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                          {{ form.para_5|as_crispy_field }}
+
+                        </div>
+                        <div class="col-md-6 text-left">
+                          {{ form.value_5|as_crispy_field }}
+                        </div></div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.User_names|as_crispy_field }}
+                            </div>
+                        </div>
+
+    <button type="submit">Submit</button>
+  </form>
+  {% else %}
+    <a type="button" class="btn btn-primary" href="{% url 'addworkflow' %}" style="margin-left:15px;">Create</a>
+  {% endif %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container-fluid">
+          {% if WFList %}
+          <br>
+          <h3>List of Workflow</h3>
+          <div>
+            <table class="table table-hover table-responsive-md table-bordered" style="font-size: 10px;">
+                <thead>
+                  <tr>
+                    <th class="custom-th" scope="col">WFID</th>
+                    <!-- <th class="custom-th" scope="col">AppName</th> -->
+                    <th class="custom-th" scope="col">Process Name</th>
+                    <th class="custom-th" scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for wf in WFList %}
+                  <tr>
+                    <td class="custom-td" scope="row">{{wf.WF_ID}}</td>
+                    <!-- <td class="custom-td">{{wf.AppName}}</td> -->
+                    <td class="custom-td">{{wf.ProcessName}}</td>
+                    <td class="custom-td">
+                        <a type="button" class="btn btn-primary" href="{% url 'editworkflow' wf.WF_ID %}" style="padding-left:10px;padding-right: 10px;">Edit</a>
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          <div>
+          {% else %}
+              <h4 class="text-center alert alert-warning" style="font-size: 14px;">No workflow available</h4>
+          {% endif %}
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+ 
+
+
+ 
